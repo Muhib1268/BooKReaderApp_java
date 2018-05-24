@@ -8,13 +8,13 @@ public class DatabaseFunction {
     private String book_title;
     private String author_name;
     private String genre_category;
-    //private String publisher_name;
+    private String publisher_name;
     
     public Integer getBook_id() {
 	return book_id;
     }
-    public void setBook_id(Integer book_id) {
-	this.book_id = book_id;
+    public void setBook_id(Integer Book_id) {
+	this.book_id = Book_id;
     }
     public Integer getAuthor_id() {
        	return author_id;
@@ -31,27 +31,27 @@ public class DatabaseFunction {
     public String getBook_title() {
     	return book_title;
     }
-    public void setBook_title(String book_title) {
-    	this.book_title = book_title;
+    public void setBook_title(String Book_title) {
+    	this.book_title = Book_title;
     }
     public String getAuthor_name() {
     	return author_name;
     }
-    public void setAuthor_name(String author_name) {
-    	this.author_name = author_name;
+    public void setAuthor_name(String Author_name) {
+    	this.author_name = Author_name;
     }
     public String getGenre_category() {
     	return genre_category;
     }
-    public void setGenre_category(String genre_category) {
-    	this.genre_category = genre_category;
+    public void setGenre_category(String Genre_category) {
+    	this.genre_category = Genre_category;
     }
-    /*
+    
     public String getPublisher_name() {
     	return publisher_name;
     }
-    public void setPublisher_name(String publisher_name) {
-    	this.publisher_name = publisher_name;
+    public void setPublisher_name(String Publisher_name) {
+    	this.publisher_name = Publisher_name;
     }
-    */
+    
 }

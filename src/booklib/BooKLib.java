@@ -19,7 +19,7 @@ public class BooKLib extends Application {
     
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/NewBookView.fxml"));
         Scene scene = new Scene(root);
         //scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
         primaryStage.setTitle("Book Catalog");

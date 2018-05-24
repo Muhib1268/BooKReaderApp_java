@@ -13,12 +13,12 @@ public class DataAccessFunction {
     
     public DataAccessFunction(){
         
-        connection = new model.ConnectionDB().getConnection();
+        connection = new ConnectionDB().getConnection();
     }
     
     public void create(DatabaseFunction databasefunction){
         
-    String sql="insert into book_catalog (book_title, author_name, genre_category) values (?, ?, ?)"; 
+    String sql="insert into book_catalog (book_title, author_name, genre_category, publisher_name) values (?, ?, ?, ?)"; 
         
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -26,7 +26,7 @@ public class DataAccessFunction {
             statement.setString(1, databasefunction.getBook_title());
             statement.setString(2, databasefunction.getAuthor_name());
             statement.setString(3, databasefunction.getGenre_category());
-            //statement.setString(4, databasefunction.getPublisher_name());      publisher_name
+            statement.setString(4, databasefunction.getPublisher_name());      
             
             
             statement.execute();
