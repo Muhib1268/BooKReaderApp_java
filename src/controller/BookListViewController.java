@@ -7,7 +7,9 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -65,8 +68,8 @@ public class BookListViewController implements Initializable {
     @FXML
     private TableView<DatabaseFunction> book_table;
 	 
-    @FXML
-    private TableColumn<DatabaseFunction, Integer> book_id_function;
+    //@FXML
+    //private TableColumn<DatabaseFunction, Integer> book_id_function;
 
     @FXML
     private TableColumn<DatabaseFunction, String> book_name_function;
@@ -76,6 +79,9 @@ public class BookListViewController implements Initializable {
 
     @FXML
     private TableColumn<DatabaseFunction, String> book_genre_function;
+    
+    @FXML
+    private TableColumn<DatabaseFunction, String> book_publisher_function;
 
     
     private DataAccessFunction dao;
@@ -85,12 +91,13 @@ public class BookListViewController implements Initializable {
         // TODO
         dao = new DataAccessFunction();
                          
-	book_id_function.setCellValueFactory(new PropertyValueFactory<>("book_id"));
-	book_name_function.setCellValueFactory(new PropertyValueFactory<>("book_name"));
-	book_author_function.setCellValueFactory(new PropertyValueFactory<>("auhor_name"));
+	//book_id_function.setCellValueFactory(new PropertyValueFactory<>("book_id"));
+	book_name_function.setCellValueFactory(new PropertyValueFactory<>("book_title"));
+	book_author_function.setCellValueFactory(new PropertyValueFactory<>("author_name"));
 	book_genre_function.setCellValueFactory(new PropertyValueFactory<>("genre_category"));
+        book_publisher_function.setCellValueFactory(new PropertyValueFactory<>("publisher_name"));
         
-        //book_publisher_function.setCellValueFactory(new PropertyValueFactory<>("book_publisher"));
+        readForBookReadingPane();
     }
     
     
@@ -161,6 +168,51 @@ public class BookListViewController implements Initializable {
             bookReadingViewWindow.setScene(bookReadingViewScene);
             bookReadingViewWindow.show(); 
 
+        }
+        
+        @FXML
+        public void readForBookReadingPane()
+        {
+            try{
+            
+                List <DatabaseFunction> resultBook = dao.read();
+                
+                //System.out.println(resultBook);
+        
+                ///*
+                if(resultBook.isEmpty()){
+                    showDialogInformation("The Database is Empty");
+                }else{
+                    book_table.setItems(FXCollections.observableList(resultBook));
+                }
+                //*/
+                   
+            }catch (Exception e){            
+                showDialogError("Failed to Read Database");
+                e.printStackTrace();
+            }   
+        }
+    
+ 
+     
+        private void showDialogInformation(String information)
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText(null);
+            alert.setContentText(information);
+		 
+            alert.showAndWait();
+        }
+	 
+        private void showDialogError(String error)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText(error);
+		 
+            alert.showAndWait();
         }
 
 }

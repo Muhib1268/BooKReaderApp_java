@@ -50,6 +50,7 @@ public class DatabaseFunction {
     public String getPublisher_name() {
     	return publisher_name;
     }
+    
     public void setPublisher_name(String Publisher_name) {
     	this.publisher_name = Publisher_name;
     }

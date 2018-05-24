@@ -84,11 +84,11 @@ public class DataAccessFunction {
         
     }   
     
-    public List <DatabaseFunction> read(String nameFunction){
+    public List <DatabaseFunction> read(){
     	
     	List <DatabaseFunction> databasefunctions = new ArrayList<>();
         
-    	String sql="select from book_catalog where name like '%" + nameFunction + "%' ";
+    	String sql="select * from book_catalog";
     	
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -99,11 +99,11 @@ public class DataAccessFunction {
             {
             	DatabaseFunction databasefunction = new DatabaseFunction();
             	
-            	databasefunction.setBook_id(resultSet.getInt("book_id"));
+            	//databasefunction.setBook_id(resultSet.getInt("book_id"));
             	databasefunction.setBook_title(resultSet.getString("book_title"));
             	databasefunction.setAuthor_name(resultSet.getString("author_name"));
             	databasefunction.setGenre_category(resultSet.getString("genre_category"));
-                //databasefunction.setPublisher_name(resultSet.getString("publisher_name"));
+                databasefunction.setPublisher_name(resultSet.getString("publisher_name"));
             	
             	databasefunctions.add(databasefunction);
             }
@@ -117,7 +117,7 @@ public class DataAccessFunction {
             	throw new RuntimeException(e);
             } 
     	
-        return null;
+        return databasefunctions;
         
     }
 }

@@ -3,8 +3,6 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
@@ -189,15 +187,15 @@ public class NewBookViewController implements Initializable {
         @FXML
         void bookCatalogMenuButtonAction(ActionEvent event) throws IOException
         {
-            
             Parent bookListViewParent = FXMLLoader.load(getClass().getResource("/view/BookListView.fxml"));
             Scene bookListViewScene = new Scene(bookListViewParent);
             
             Stage bookListViewWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
             
             bookListViewWindow.setScene(bookListViewScene);
+            
             bookListViewWindow.show(); 
-
+            
         }
         
         @FXML
@@ -247,5 +245,7 @@ public class NewBookViewController implements Initializable {
 		 
 		alert.showAndWait();
 	}
+        
+        
     
 }
