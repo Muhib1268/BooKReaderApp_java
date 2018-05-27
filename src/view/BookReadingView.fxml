@@ -22,7 +22,7 @@
               <tabs>
                 <Tab fx:id="bookA" style="-fx-background-color: #66CDAA; -fx-background-border: none;" text="Book A">
                   <content>
-                    <AnchorPane fx:id="paneBookA" minHeight="0.0" minWidth="0.0" prefHeight="452.0" prefWidth="505.0" style="-fx-background-color: #66CDAA;" />
+                    <AnchorPane fx:id="paneBookA" minHeight="0.0" minWidth="0.0" prefHeight="488.0" prefWidth="458.0" style="-fx-background-color: #66CDAA;" />
                   </content>
                 </Tab>
                   <Tab fx:id="bookB" style="-fx-background-color: #66CDAA; -fx-background-border: none;" text="BookB">

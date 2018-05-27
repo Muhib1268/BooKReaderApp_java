@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -183,6 +179,7 @@ public class BookListViewController implements Initializable {
                 if(resultBook.isEmpty()){
                     showDialogInformation("The Database is Empty");
                 }else{
+                    //Collections.sort(databasefunction.book_title);
                     book_table.setItems(FXCollections.observableList(resultBook));
                 }
                 //*/

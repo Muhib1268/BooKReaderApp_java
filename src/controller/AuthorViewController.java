@@ -1,13 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,13 +12,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import model.DataAccessFunction;
+import model.DatabaseFunction;
 
 /**
  * FXML Controller class
@@ -33,10 +35,9 @@ public class AuthorViewController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+    
+    //String [] authorList = {"George Orwell", "Robert Louis Stevenson", "Dan Brown"};
+       
     @FXML
     private AnchorPane rootPane;
 
@@ -59,15 +60,38 @@ public class AuthorViewController implements Initializable {
     private AnchorPane paneAuthor;
 
     @FXML
-    private TableView<?> author_table;
+    private TableView<DatabaseFunction> author_table;
 
     @FXML
-    private TableColumn<?, ?> authorColumn;
+    private TableColumn<DatabaseFunction, String> author_book_column;
 
     @FXML
-    private TableColumn<?, ?> author_bookNum;
+    private TableColumn<DatabaseFunction, String> author_bookGenre_column;
 
-
+    @FXML
+    private TableColumn<DatabaseFunction, String> author_bookPublisher_Column;
+    
+    @FXML
+    private ComboBox<String> authorListBoxFunction;
+    
+    private DataAccessFunction daoAuthor;
+    
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+        
+        daoAuthor = new DataAccessFunction();
+        //authorListBox.getItems().addAll(authorList);
+        
+        //authorListBoxFunction.getItems().addAll(new PropertyValueFactory<>("author_name"));
+        author_book_column.setCellValueFactory(new PropertyValueFactory<>("book_title"));
+	author_bookGenre_column.setCellValueFactory(new PropertyValueFactory<>("genre_category"));
+        author_bookPublisher_Column.setCellValueFactory(new PropertyValueFactory<>("publisher_name"));
+        
+        authorListComboBoxFunction();
+        
+    } 
         @FXML
         void bookEntryMenuButtonAction(ActionEvent event) throws IOException
         {
@@ -137,5 +161,71 @@ public class AuthorViewController implements Initializable {
             bookListViewWindow.setScene(bookListViewScene);
             bookListViewWindow.show(); 
 
+        }
+        
+        @FXML
+        void combobox_selectAction(ActionEvent event) {
+            readForAuthorViewColumns();
+        }
+        
+        
+        void readForAuthorViewColumns()
+        {
+            try{
+            
+                List <DatabaseFunction> resultAuthor = daoAuthor.readForAuthorView(authorListBoxFunction.getValue());
+                
+                if(resultAuthor.isEmpty()){
+                    showDialogInformation("The Database is Empty");
+                }else{
+                    //Collections.sort(databasefunction.book_title);
+                    author_table.setItems(FXCollections.observableList(resultAuthor));
+                }  
+            }catch (Exception e){            
+                showDialogError("Failed to Read Database");
+                e.printStackTrace();
+            }   
+        }
+        
+  
+        void authorListComboBoxFunction()
+        {
+            try{
+            
+                List <String> authorListBox = daoAuthor.readAuthorList();
+                
+                if(authorListBox.isEmpty()){
+                    showDialogInformation("The Author List is Empty");
+                }else{
+                    //Collections.sort(databasefunction.book_title);
+                    authorListBoxFunction.setItems(FXCollections.observableList(authorListBox));
+                    //System.out.println(authorListBox);
+                } 
+            }catch (Exception e){            
+                showDialogError("Failed to Read Database");
+                e.printStackTrace();
+            }   
+        }
+        
+        
+        //readAuthorList();
+        private void showDialogInformation(String information)
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText(null);
+            alert.setContentText(information);
+		 
+            alert.showAndWait();
+        }
+	 
+        private void showDialogError(String error)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText(error);
+		 
+            alert.showAndWait();
         }
 }
