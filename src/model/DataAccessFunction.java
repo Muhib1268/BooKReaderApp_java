@@ -192,4 +192,78 @@ public class DataAccessFunction {
          return DBfunctionAuthorList;
         
     }
+    public List <String> readGenreList(){
+    	
+    	List <String> DBfunctionGenreList = new ArrayList<>();
+        
+    	String sql="select distinct genre_category from book_catalog order by genre_category";
+    	
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            
+            ResultSet resultSet = statement.executeQuery();
+            
+            while (resultSet.next())
+            {
+            	//DatabaseFunction databasefunction = new DatabaseFunction();
+                
+                String genreName;
+                
+            	genreName = resultSet.getString("genre_category");
+            	
+            	DBfunctionGenreList.add(genreName);
+            }
+            
+            resultSet.close();
+            statement.close();
+            
+            } catch (SQLException e) {
+            	// TODO Auto-generated catch block
+            	e.printStackTrace();
+            	throw new RuntimeException(e);
+            } 
+    	
+         return DBfunctionGenreList;
+        
+    }
+    
+        public List <DatabaseFunction> readForGenreView(String genre_category_function){
+    	
+    	List <DatabaseFunction> DBfunction_genre = new ArrayList<>();
+        
+    	String sql="select book_title, author_name, publisher_name from book_catalog "
+                + "where genre_category like '%" + genre_category_function + "%' order by book_title";
+    	
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            
+            ResultSet resultSet = statement.executeQuery();
+            
+            while (resultSet.next())
+            {
+            	DatabaseFunction databasefunction = new DatabaseFunction();
+            	
+            	//databasefunction.setBook_id(resultSet.getInt("book_id"));
+            	databasefunction.setBook_title(resultSet.getString("book_title"));
+            	databasefunction.setAuthor_name(resultSet.getString("author_name"));
+                databasefunction.setPublisher_name(resultSet.getString("publisher_name"));
+            	
+            	DBfunction_genre.add(databasefunction);
+            }
+            
+            resultSet.close();
+            statement.close();
+            
+            } catch (SQLException e) {
+            	// TODO Auto-generated catch block
+            	e.printStackTrace();
+            	throw new RuntimeException(e);
+            } 
+    	
+        return DBfunction_genre;
+        
+    }
 }
+
+
+

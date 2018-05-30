@@ -126,8 +126,9 @@ public class AuthorViewController implements Initializable {
         {
             
             Parent homeViewParent = FXMLLoader.load(getClass().getResource("/view/HomeView.fxml"));
-            Scene homeViewScene = new Scene(homeViewParent);
             
+            //homeViewParent.setId("HomeViewBackGround");
+            Scene homeViewScene = new Scene(homeViewParent);                   
             Stage homeViewWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
             
             homeViewWindow.setScene(homeViewScene);
@@ -164,7 +165,7 @@ public class AuthorViewController implements Initializable {
         }
         
         @FXML
-        void combobox_selectAction(ActionEvent event) {
+        void author_combobox_selectAction(ActionEvent event) {
             readForAuthorViewColumns();
         }
         

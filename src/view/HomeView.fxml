@@ -5,7 +5,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="625.0" prefWidth="468.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeViewController">
    <children>
-      <AnchorPane prefHeight="62.0" prefWidth="506.0" style="-fx-background-color: #008B8B;">
+      <AnchorPane prefHeight="62.0" prefWidth="506.0" style="-fx-background-color: #2F4F4F;">
          <children>
             <Button fx:id="buttonAuthorList" layoutX="21.0" layoutY="12.0" mnemonicParsing="false" onAction="#authorMenuButtonAction" prefHeight="39.0" prefWidth="69.0" style="-fx-background-color: #66CDAA;" text="Author" textAlignment="CENTER" />
             <Button fx:id="buttonBookList" layoutX="116.0" layoutY="12.0" mnemonicParsing="false" onAction="#bookCatalogMenuButtonAction" prefHeight="39.0" prefWidth="69.0" style="-fx-background-color: #66CDAA; -fx-text-alignment: center;" text="Catalog" textFill="#0d0000" />
@@ -13,5 +13,6 @@
             <Button fx:id="buttonGenreList" layoutX="211.0" layoutY="12.0" mnemonicParsing="false" onAction="#genreMenuButtonAction" prefHeight="39.0" prefWidth="69.0" style="-fx-background-color: #66CDAA;" text="Genre" textAlignment="CENTER" />
             <Button fx:id="buttonReadBooks" layoutX="313.0" layoutY="12.0" mnemonicParsing="false" onAction="#readBookMenuButtonAction" prefHeight="39.0" prefWidth="69.0" style="-fx-background-color: #66CDAA;" text="Read" textAlignment="CENTER" />
          </children></AnchorPane>
+      <AnchorPane fx:id="homeStylePane" layoutY="72.0" prefHeight="554.0" prefWidth="506.0" />
    </children>
 </AnchorPane>

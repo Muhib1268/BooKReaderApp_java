@@ -16,9 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 /**
@@ -27,17 +25,12 @@ import javafx.stage.Stage;
  * @author Permafrost
  */
 public class HomeViewController implements Initializable {
-
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }  
     
     @FXML
     private AnchorPane rootPane;
+    
+    @FXML
+    private AnchorPane homeStylePane;
 
     @FXML
     private Button buttonAuthorList;
@@ -53,8 +46,17 @@ public class HomeViewController implements Initializable {
 
     @FXML
     private Button buttonReadBooks;
-
-	@FXML
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+        
+        homeStylePane.setId("HomeViewBackGround");
+        
+        homeStylePane.getStylesheets().add(getClass().getResource("/view/homeViewStyle.css").toExternalForm());
+    } 
+    
+        @FXML
 	void authorMenuButtonAction(ActionEvent event) throws IOException
         {
             Parent authorViewParent = FXMLLoader.load(getClass().getResource("/view/AuthorView.fxml"));

@@ -21,7 +21,7 @@
          </children></AnchorPane>
       <AnchorPane fx:id="paneAuthor" layoutY="73.0" prefHeight="554.0" prefWidth="506.0" style="-fx-background-color: #008B8B;">
          <children>
-            <TableView fx:id="author_table" layoutX="10.0" layoutY="71.0" prefHeight="473.0" prefWidth="487.0">
+            <TableView fx:id="author_table" layoutX="10.0" layoutY="61.0" prefHeight="483.0" prefWidth="487.0">
               <columns>
                 <TableColumn fx:id="author_book_column" prefWidth="283.0" style="-fx-text-alignment: right; -fx-background-color: #F0F8FF;" text="Book" />
                 <TableColumn fx:id="author_bookGenre_column" prefWidth="90.0" style="-fx-background-color: #D8BFD8;" text="Genre" />
@@ -33,7 +33,7 @@
                   <Font name="Verdana Bold" size="19.0" />
                </font>
             </Label>
-            <ComboBox fx:id="authorListBoxFunction" layoutX="95.0" layoutY="28.0" onAction="#combobox_selectAction" prefHeight="25.0" prefWidth="317.0" promptText="Select Author" />
+            <ComboBox fx:id="authorListBoxFunction" layoutX="153.0" layoutY="28.0" onAction="#author_combobox_selectAction" prefHeight="25.0" prefWidth="200.0" promptText="Select Author" style="-fx-background-color: #FFFACD;" />
          </children>
       </AnchorPane>
    </children>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -20,18 +21,19 @@
          </children></AnchorPane>
       <AnchorPane fx:id="genrePane" layoutY="71.0" prefHeight="554.0" prefWidth="506.0" style="-fx-background-color: #008B8B;">
          <children>
-            <TableView fx:id="genre_table" layoutX="10.0" layoutY="28.0" prefHeight="518.0" prefWidth="478.0">
+            <TableView fx:id="genre_table" layoutX="10.0" layoutY="70.0" prefHeight="476.0" prefWidth="478.0">
                <columns>
                   <TableColumn fx:id="genreBook" prefWidth="228.0" style="-fx-text-alignment: right; -fx-background-color: #F0F8FF;" text="    Book" />
                   <TableColumn fx:id="genreAuthor" prefWidth="154.0" style="-fx-background-color: #C0C0C0;" text="       Author" />
                   <TableColumn fx:id="genrePublication" prefWidth="110.0" style="-fx-background-color: #B0E0E6;" text="Publisher" />
                </columns>
             </TableView>
-            <Label layoutX="220.0" prefHeight="28.0" prefWidth="77.0" text="GENRE">
+            <Label layoutX="221.0" prefHeight="28.0" prefWidth="77.0" text="GENRE">
                <font>
                   <Font name="Verdana Bold" size="19.0" />
                </font>
             </Label>
+            <ComboBox fx:id="genreListBoxFunction" layoutX="184.0" layoutY="28.0" onAction="#genre_combobox_selectAction" prefWidth="150.0" promptText="Select Genre" style="-fx-background-color: #FFFACD;" />
          </children>
       </AnchorPane>
    </children>

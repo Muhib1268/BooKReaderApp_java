@@ -2,7 +2,6 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -211,5 +210,32 @@ public class BookListViewController implements Initializable {
 		 
             alert.showAndWait();
         }
+        
+        
+    @FXML
+    void mousePressedOnBook(MouseEvent event) {
+        
+        /*
+        GridPane gridpane = new GridPane();
+        
+        Button button = new Button();
+        GridPane.setRowIndex(button, 0);
+        GridPane.setColumnIndex(button, 1);
+        Label label = new Label();
+        GridPane.setConstraints(label, 2, 0);
+        gridpane.getChildren().addAll(button, label);
+
+        */
+        if(book_table.getSelectionModel().getSelectedItem()==null)
+        {
+            showDialogInformation("No Items To Select");
+        }
+        else
+        {
+            //DatabaseFunction DBfunctionBookSelect = book_table.getSelectionModel().getSelectedItem();
+            System.out.println(book_table.getSelectionModel().getSelectedItem().getBook_title());
+        }
+        
+    }
 
 }

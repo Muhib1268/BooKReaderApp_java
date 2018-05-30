@@ -7,7 +7,9 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,13 +17,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import model.DataAccessFunction;
+import model.DatabaseFunction;
 
 /**
  * FXML Controller class
@@ -32,11 +39,7 @@ public class GenreViewController implements Initializable {
 
     /**
      * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+     */ 
     
     @FXML
     private AnchorPane rootPane;
@@ -60,16 +63,37 @@ public class GenreViewController implements Initializable {
     private AnchorPane genrePane;
 
     @FXML
-    private TableView<?> genre_table;
+    private TableView<DatabaseFunction> genre_table;
 
     @FXML
-    private TableColumn<?, ?> genreBook;
+    private TableColumn<DatabaseFunction, String> genreBook;
 
     @FXML
-    private TableColumn<?, ?> genreAuthor;
+    private TableColumn<DatabaseFunction, String> genreAuthor;
 
     @FXML
-    private TableColumn<?, ?> genrePublication;
+    private TableColumn<DatabaseFunction, String> genrePublication;
+    
+    
+    @FXML
+    private ComboBox<String> genreListBoxFunction;
+    
+    DataAccessFunction daoGenre;
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+                
+        daoGenre = new DataAccessFunction();
+        //authorListBox.getItems().addAll(authorList);
+        
+        //authorListBoxFunction.getItems().addAll(new PropertyValueFactory<>("author_name"));
+        genreBook.setCellValueFactory(new PropertyValueFactory<>("book_title"));
+	genreAuthor.setCellValueFactory(new PropertyValueFactory<>("author_name"));
+        genrePublication.setCellValueFactory(new PropertyValueFactory<>("publisher_name"));
+        
+        genreListComboBoxFunction();
+    }   
 
     	@FXML
 	void authorMenuButtonAction(ActionEvent event) throws IOException
@@ -138,6 +162,70 @@ public class GenreViewController implements Initializable {
             bookListViewWindow.show(); 
 
         }
-
+        
+        @FXML
+        void genre_combobox_selectAction(ActionEvent event) {
+            readForGenreViewColumns();
+        }
+        
+        void readForGenreViewColumns()
+        {
+            try{
+                List <DatabaseFunction> resultGenre = daoGenre.readForGenreView(genreListBoxFunction.getValue());
+                
+                if(resultGenre.isEmpty()){
+                    showDialogInformation("The Database is Empty");
+                }else{
+                    //Collections.sort(databasefunction.book_title);
+                    genre_table.setItems(FXCollections.observableList(resultGenre));
+                }  
+            }catch (Exception e){            
+                showDialogError("Failed to Read Database");
+                e.printStackTrace();
+            }   
+        }
+        
+        
+        
+        void genreListComboBoxFunction()
+        {
+            try{
+            
+                List <String> genreListBox = daoGenre.readGenreList();
+                
+                if(genreListBox.isEmpty()){
+                    showDialogInformation("The Genre List is Empty");
+                }else{
+                    //Collections.sort(databasefunction.book_title);
+                    genreListBoxFunction.setItems(FXCollections.observableList(genreListBox));
+                    //System.out.println(authorListBox);
+                } 
+            }catch (Exception e){            
+                showDialogError("Failed to Read Database");
+                e.printStackTrace();
+            }   
+        }
+        
+        
+        //readAuthorList();
+        private void showDialogInformation(String information)
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText(null);
+            alert.setContentText(information);
+		 
+            alert.showAndWait();
+        }
+	 
+        private void showDialogError(String error)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText(error);
+		 
+            alert.showAndWait();
+        }
     
 }

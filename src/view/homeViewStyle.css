@@ -1,0 +1,6 @@
+#HomeViewBackGround
+{
+    -fx-background-image: url("lib.jpg");
+    -fx-background-size: 554 506;
+    -fx-opacity: 0.7;
+}
