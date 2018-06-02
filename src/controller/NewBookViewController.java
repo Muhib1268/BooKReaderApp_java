@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -27,11 +28,13 @@ public class NewBookViewController implements Initializable {
     
     	@FXML
 	private AnchorPane rootPane;
+         
+        @FXML
+        private Button buttonAuthorList;
 
-	@FXML
-	private Button buttonEnterNewBook;
-         
-         
+        @FXML
+        private Button buttonBookList;
+    
         @FXML
         private Button buttonGenreList;
 
@@ -43,6 +46,9 @@ public class NewBookViewController implements Initializable {
         private Circle buttonHome;
         
         
+        @FXML
+        private Tab bookEntryTab;
+            
 	@FXML
 	private AnchorPane paneBookEntry;
 
@@ -64,38 +70,30 @@ public class NewBookViewController implements Initializable {
         @FXML
 	private Button buttonEntryCancel;
 
-         
+        @FXML
+        private Tab bookEditTab;
+
+        @FXML
+        private TextField editName;
+
+        @FXML
+        private TextField editAuthor;
+
+        @FXML
+        private TextField editGenre;
+
+        @FXML
+        private Button buttonEditSave;
+
+        @FXML
+        private Button buttonEditCancel;
+
+        @FXML
+        private TextField editPublisher; 
          /*
          @FXML
 	 private TableColumn<DatabaseFunction, String> book_publisher_function;
          */
-         
-	@FXML
-	private AnchorPane genrePane;
-
-	@FXML
-	private TableView<?> genre_table;
-
-	@FXML
-	private TableColumn<?, ?> genreBook;
-
-	@FXML
-	private TableColumn<?, ?> genreAuthor;
-
-	@FXML
-	private TableColumn<?, ?> genrePublication;
-
-	@FXML
-	private AnchorPane paneAuthor;
-
-	@FXML
-	private TableView<?> author_table;
-
-	@FXML
-	private TableColumn<?, ?> authorColumn;
-
-	@FXML
-	private TableColumn<?, ?> author_bookNum;
     
 	private DataAccessFunction dao;
     
@@ -103,7 +101,7 @@ public class NewBookViewController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 		// TODO
 		dao = new DataAccessFunction();
-		 
+		bookEditTab.setDisable(true); 
 		//showDialogInformation("Test Information");
         
         }
@@ -140,20 +138,23 @@ public class NewBookViewController implements Initializable {
             databasefunction.setGenre_category(entryGenre.getText());
             databasefunction.setPublisher_name(entryPublisher.getText());
             
-            //getText test code
-            //System.out.println(entryName.getText());
-            //System.out.println(entryAuthor.getText());
-            //System.out.println(entryGenre.getText());
-            try {
-                dao.create(databasefunction);
-                showDialogInformation("Create Function Success");
+            if(entryName.getText().isEmpty() || entryAuthor.getText().isEmpty()|| 
+                        entryGenre.getText().isEmpty() || entryPublisher.getText().isEmpty())
+            {
+                showDialogError("Text Field Cannot Be Empty");
                 bookEntryCancelFunction();
-            } catch (Exception e) {
-            	// TODO Auto-generated catch block
-                showDialogError("Create Function Not Working");
-            	e.printStackTrace();
-            }
-            
+                
+            }else{
+                try {
+                        dao.create(databasefunction);
+                        showDialogInformation("Create Function Success");
+                        bookEntryCancelFunction();
+                    }catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        showDialogError("Create Function Not Working");
+                        e.printStackTrace();
+                    }                
+            }                    
 	}
 
 	@FXML

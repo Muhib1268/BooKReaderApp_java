@@ -63,18 +63,16 @@ public class DataAccessFunction {
         
     }    
     
-    public void delete(Integer idFunction){
+    public void delete(String bookName){
     	
-        String sql="delete from book_catalog where id = ?"; 
+        String sql="delete from book_catalog where book_title = ?"; 
         
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             
-            statement.setInt(1, idFunction);
-           
+            statement.setString(1, bookName);          
             statement.execute();
-            statement.close();
-            
+            statement.close();           
             } catch (SQLException e) {
             	// TODO Auto-generated catch block
             	e.printStackTrace();

@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -14,6 +15,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -171,26 +174,17 @@ public class BookListViewController implements Initializable {
             try{
             
                 List <DatabaseFunction> resultBook = dao.read();
-                
-                //System.out.println(resultBook);
-        
-                ///*
                 if(resultBook.isEmpty()){
                     showDialogInformation("The Database is Empty");
                 }else{
-                    //Collections.sort(databasefunction.book_title);
                     book_table.setItems(FXCollections.observableList(resultBook));
-                }
-                //*/
-                   
+                }     
             }catch (Exception e){            
                 showDialogError("Failed to Read Database");
                 e.printStackTrace();
             }   
         }
-    
- 
-     
+        
         private void showDialogInformation(String information)
         {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -212,30 +206,59 @@ public class BookListViewController implements Initializable {
         }
         
         
+        private void showEditDeleteOption(String bookName)
+        {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Edit And Delete Option");
+            alert.setHeaderText("Think Before You Click");
+            alert.setContentText("Do you want to edit or delete the book: " + bookName);
+            
+            ButtonType buttonTypeEdit = new ButtonType("EDIT");
+            ButtonType buttonTypeDelete = new ButtonType("DELETE");
+            ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
+            alert.getButtonTypes().setAll(buttonTypeEdit, buttonTypeDelete, buttonTypeCancel);
+            Optional<ButtonType> result =alert.showAndWait();
+            if (result.get() == buttonTypeEdit){
+                // ... user chose "Edit"
+                System.out.println("Edit");
+            } else if (result.get() == buttonTypeDelete) {
+                // ... user chose "Delete"
+                deleteBookFromDB();
+                System.out.println("Delete");
+            } else {
+                 // ... user chose CANCEL or closed the dialog
+            }
+        }
+        
     @FXML
     void mousePressedOnBook(MouseEvent event) {
-        
-        /*
-        GridPane gridpane = new GridPane();
-        
-        Button button = new Button();
-        GridPane.setRowIndex(button, 0);
-        GridPane.setColumnIndex(button, 1);
-        Label label = new Label();
-        GridPane.setConstraints(label, 2, 0);
-        gridpane.getChildren().addAll(button, label);
-
-        */
         if(book_table.getSelectionModel().getSelectedItem()==null)
         {
             showDialogInformation("No Items To Select");
         }
         else
         {
-            //DatabaseFunction DBfunctionBookSelect = book_table.getSelectionModel().getSelectedItem();
+            showEditDeleteOption(book_table.getSelectionModel().getSelectedItem().getBook_title());
+            
             System.out.println(book_table.getSelectionModel().getSelectedItem().getBook_title());
-        }
-        
+        }   
     }
-
+    
+    void deleteBookFromDB()
+    {
+        if(book_table.getSelectionModel().getSelectedItem()==null)
+        {
+            showDialogInformation("No Items To Delete");
+        }
+        else
+        {
+            try{   
+                dao.delete(book_table.getSelectionModel().getSelectedItem().getBook_title());
+                readForBookReadingPane();                   
+            }catch (Exception e){            
+                showDialogError("Failed to Delete from Database");
+                e.printStackTrace();
+            } 
+        }   
+    }
 }
