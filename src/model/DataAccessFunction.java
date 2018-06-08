@@ -41,7 +41,7 @@ public class DataAccessFunction {
     
     public void update(DatabaseFunction databasefunction){
         
-        String sql="update book_catalog set book_title=?, author_name=?, genre_category=? where id=?"; 
+        String sql="update book_catalog set book_title=?, author_name=?, genre_category=?, publisher_name=? where book_id=?"; 
         
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -49,8 +49,8 @@ public class DataAccessFunction {
             statement.setString(1, databasefunction.getBook_title());
             statement.setString(2, databasefunction.getAuthor_name());
             statement.setString(3, databasefunction.getGenre_category());
-            //statement.setString(4, databasefunction.getPublisher_name());     , publisher_name=?
-            statement.setInt(4, databasefunction.getBook_id());
+            statement.setString(4, databasefunction.getPublisher_name());
+            statement.setInt(5, databasefunction.getBook_id());
             
             statement.execute();
             statement.close();
@@ -202,9 +202,7 @@ public class DataAccessFunction {
             ResultSet resultSet = statement.executeQuery();
             
             while (resultSet.next())
-            {
-            	//DatabaseFunction databasefunction = new DatabaseFunction();
-                
+            {               
                 String genreName;
                 
             	genreName = resultSet.getString("genre_category");
@@ -224,6 +222,37 @@ public class DataAccessFunction {
          return DBfunctionGenreList;
         
     }
+    
+    
+     public int getBookIDForEditFunction(String selected_book_name){
+    	
+    	int book_id_from_DB=0;
+        //System.out.println(selected_book_name);
+    	String sql="select book_id from book_catalog where book_title like '%" + selected_book_name + "%'";
+    	
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            
+            ResultSet resultSet = statement.executeQuery();
+            //statement.setString(1, selected_book_name);             
+            
+            while (resultSet.next())
+            {               
+                book_id_from_DB = resultSet.getInt("book_id");
+            }
+            
+            resultSet.close();
+            statement.close();
+            
+            } catch (SQLException e) {
+            	// TODO Auto-generated catch block
+            	e.printStackTrace();
+            	throw new RuntimeException(e);
+            }    	
+         return book_id_from_DB; 
+    }
+
+    
     
         public List <DatabaseFunction> readForGenreView(String genre_category_function){
     	

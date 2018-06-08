@@ -2,8 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
@@ -19,107 +17,48 @@
             <Button fx:id="buttonReadBooks" layoutX="345.0" layoutY="13.0" mnemonicParsing="false" onAction="#readBookMenuButtonAction" prefHeight="39.0" prefWidth="69.0" style="-fx-background-color: #66CDAA;" text="Read" textAlignment="CENTER" />
             <Circle fx:id="buttonHome" accessibleRole="BUTTON" fill="#4c6c83" layoutX="460.0" layoutY="32.0" onMouseClicked="#onButtonHomeClicked" radius="19.0" stroke="BLACK" strokeType="INSIDE" />
          </children></AnchorPane>
-      <TabPane layoutY="71.0" prefHeight="554.0" prefWidth="506.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab fx:id="bookEntryTab" style="-fx-background-color: #FFE4C4;" text="New Book">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <AnchorPane fx:id="paneBookEntry" prefHeight="524.0" prefWidth="506.0" style="-fx-background-color: #FFE4C4;">
-                           <children>
-                              <Label layoutX="149.0" layoutY="7.0" prefHeight="39.0" prefWidth="209.0" text="BOOK ENTRY">
-                                 <font>
-                                    <Font name="Goudy Old Style" size="33.0" />
-                                 </font>
-                              </Label>
-                              <TextField fx:id="entryName" layoutX="109.0" layoutY="84.0" prefHeight="26.0" prefWidth="383.0" style="-fx-background-color: #D8BFD8;" />
-                              <TextField fx:id="entryAuthor" layoutX="109.0" layoutY="136.0" prefHeight="26.0" prefWidth="264.0" style="-fx-background-color: #D8BFD8;" />
-                              <TextField fx:id="entryGenre" layoutX="109.0" layoutY="195.0" prefHeight="26.0" prefWidth="264.0" style="-fx-background-color: #D8BFD8;" />
-                              <Label layoutX="22.0" layoutY="83.0" prefHeight="28.0" prefWidth="77.0" text="Book Name">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="22.0" layoutY="135.0" prefHeight="28.0" prefWidth="77.0" text="Author">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="22.0" layoutY="194.0" prefHeight="28.0" prefWidth="77.0" text="Genre">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <Button fx:id="buttonEntrySave" layoutX="277.0" layoutY="338.0" mnemonicParsing="false" onAction="#bookEntrySaveFunction" prefHeight="32.0" prefWidth="96.0" style="-fx-background-color: #008080;" text="Save" textFill="#f8f8f8">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                              </Button>
-                              <Button fx:id="buttonEntryCancel" layoutX="120.0" layoutY="338.0" mnemonicParsing="false" onAction="#bookEntryCancelFunction" prefHeight="32.0" prefWidth="96.0" style="-fx-background-color: #008080;" text="Cancel" textFill="#f8f8f8">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                              </Button>
-                              <Label layoutX="22.0" layoutY="254.0" text="Publisher">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <TextField fx:id="entryPublisher" layoutX="109.0" layoutY="252.0" prefHeight="25.0" prefWidth="264.0" style="-fx-background-color: #D8BFD8;" />
-                           </children>
-                        </AnchorPane>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-          <Tab fx:id="bookEditTab" style="-fx-background-color: #B0E0E6;" text="Edit Book">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #B0E0E6;">
-                     <children>
-                        <Label layoutX="142.0" layoutY="22.0" prefHeight="39.0" prefWidth="194.0" text="BOOK EDIT">
-                           <font>
-                              <Font name="Goudy Old Style" size="33.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="editName" layoutX="109.0" layoutY="93.0" prefHeight="26.0" prefWidth="383.0" style="-fx-background-color: #D8BFD8;" />
-                        <TextField fx:id="editAuthor" layoutX="108.0" layoutY="140.0" prefHeight="26.0" prefWidth="264.0" style="-fx-background-color: #D8BFD8;" />
-                        <TextField fx:id="editGenre" layoutX="108.0" layoutY="189.0" prefHeight="26.0" prefWidth="264.0" style="-fx-background-color: #D8BFD8;" />
-                        <Label layoutX="26.0" layoutY="92.0" prefHeight="28.0" prefWidth="77.0" text="Book Name">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="26.0" layoutY="139.0" prefHeight="28.0" prefWidth="77.0" text="Author">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="26.0" layoutY="188.0" prefHeight="28.0" prefWidth="77.0" text="Genre">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Button fx:id="buttonEditSave" layoutX="288.0" layoutY="334.0" mnemonicParsing="false" onAction="#bookEntrySaveFunction" prefHeight="32.0" prefWidth="96.0" style="-fx-background-color: #008080;" text="Save" textFill="#f8f8f8">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="buttonEditCancel" layoutX="94.0" layoutY="334.0" mnemonicParsing="false" onAction="#bookEntryCancelFunction" prefHeight="32.0" prefWidth="96.0" style="-fx-background-color: #008080;" text="Cancel" textFill="#f8f8f8">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </Button>
-                        <Label layoutX="26.0" layoutY="240.0" text="Publisher">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="editPublisher" layoutX="108.0" layoutY="238.0" prefHeight="25.0" prefWidth="264.0" style="-fx-background-color: #D8BFD8;" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-        </tabs>
-      </TabPane>
+      <AnchorPane fx:id="paneBookEntry" layoutY="68.0" prefHeight="558.0" prefWidth="506.0" style="-fx-background-color: #FFE4C4;">
+         <children>
+            <Label layoutX="149.0" layoutY="7.0" prefHeight="39.0" prefWidth="209.0" text="BOOK ENTRY">
+               <font>
+                  <Font name="Goudy Old Style" size="33.0" />
+               </font>
+            </Label>
+            <TextField fx:id="entryName" layoutX="109.0" layoutY="84.0" prefHeight="26.0" prefWidth="383.0" style="-fx-background-color: #D8BFD8;" />
+            <TextField fx:id="entryAuthor" layoutX="109.0" layoutY="136.0" prefHeight="26.0" prefWidth="264.0" style="-fx-background-color: #D8BFD8;" />
+            <TextField fx:id="entryGenre" layoutX="109.0" layoutY="195.0" prefHeight="26.0" prefWidth="264.0" style="-fx-background-color: #D8BFD8;" />
+            <Label layoutX="22.0" layoutY="83.0" prefHeight="28.0" prefWidth="77.0" text="Book Name">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="22.0" layoutY="135.0" prefHeight="28.0" prefWidth="77.0" text="Author">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="22.0" layoutY="194.0" prefHeight="28.0" prefWidth="77.0" text="Genre">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="buttonEntrySave" layoutX="277.0" layoutY="338.0" mnemonicParsing="false" onAction="#bookEntrySaveFunction" prefHeight="32.0" prefWidth="96.0" style="-fx-background-color: #008080;" text="Save" textFill="#f8f8f8">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonEntryCancel" layoutX="120.0" layoutY="338.0" mnemonicParsing="false" onAction="#bookEntryCancelFunction" prefHeight="32.0" prefWidth="96.0" style="-fx-background-color: #008080;" text="Cancel" textFill="#f8f8f8">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Label layoutX="22.0" layoutY="254.0" text="Publisher">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="entryPublisher" layoutX="109.0" layoutY="252.0" prefHeight="25.0" prefWidth="264.0" style="-fx-background-color: #D8BFD8;" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

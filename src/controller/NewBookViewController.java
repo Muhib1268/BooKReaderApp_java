@@ -45,9 +45,6 @@ public class NewBookViewController implements Initializable {
         @FXML
         private Circle buttonHome;
         
-        
-        @FXML
-        private Tab bookEntryTab;
             
 	@FXML
 	private AnchorPane paneBookEntry;
@@ -70,26 +67,6 @@ public class NewBookViewController implements Initializable {
         @FXML
 	private Button buttonEntryCancel;
 
-        @FXML
-        private Tab bookEditTab;
-
-        @FXML
-        private TextField editName;
-
-        @FXML
-        private TextField editAuthor;
-
-        @FXML
-        private TextField editGenre;
-
-        @FXML
-        private Button buttonEditSave;
-
-        @FXML
-        private Button buttonEditCancel;
-
-        @FXML
-        private TextField editPublisher; 
          /*
          @FXML
 	 private TableColumn<DatabaseFunction, String> book_publisher_function;
@@ -101,8 +78,6 @@ public class NewBookViewController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 		// TODO
 		dao = new DataAccessFunction();
-		bookEditTab.setDisable(true); 
-		//showDialogInformation("Test Information");
         
         }
 	 

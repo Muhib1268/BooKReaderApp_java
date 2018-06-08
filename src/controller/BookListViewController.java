@@ -82,7 +82,18 @@ public class BookListViewController implements Initializable {
     private TableColumn<DatabaseFunction, String> book_publisher_function;
 
     
+    @FXML
+    private Button buttonOpenBook;
+
+    @FXML
+    private Button buttonEditFromDB;
+
+    @FXML
+    private Button buttonDeleteFromDB;
+    
     private DataAccessFunction dao;
+    
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -185,6 +196,59 @@ public class BookListViewController implements Initializable {
             }   
         }
         
+    @FXML
+    void onDeleteButtonClicked(MouseEvent event) {
+        if(book_table.getSelectionModel().getSelectedItem()==null)
+        {
+            showDialogError("Please Select a book");
+        }
+        else{
+            showEditDeleteOption(book_table.getSelectionModel().getSelectedItem().getBook_title());
+        }
+    }
+
+    
+    
+    @FXML
+    void onEditButtonClicked(MouseEvent event) throws IOException
+    {
+        if(book_table.getSelectionModel().getSelectedItem()==null)
+        {
+            showDialogError("Please Select a book");
+        }
+        else{
+            //showEditDeleteOption(book_table.getSelectionModel().getSelectedItem().getBook_title());
+            /*
+            Parent bookReadingViewParent = FXMLLoader.load(getClass().getResource("/view/BookEditView.fxml"));
+            Scene bookReadingViewScene = new Scene(bookReadingViewParent);
+            
+            Stage bookReadingViewWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
+            
+            bookReadingViewWindow.setScene(bookReadingViewScene);
+            bookReadingViewWindow.show(); 
+            */
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/BookEditView.fxml"));
+            
+            Parent bookEditViewParent= loader.load();
+            Scene bookEditViewScene = new Scene(bookEditViewParent);
+            BookEditViewController controller = loader.getController();
+            DatabaseFunction DBFunction=new DatabaseFunction();
+            controller.initEditData(book_table.getSelectionModel().getSelectedItem());
+            
+            Stage bookEditViewWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
+            
+            bookEditViewWindow.setScene(bookEditViewScene);
+            bookEditViewWindow.show(); 
+        }
+    }
+
+    @FXML
+    void onOpenButtonClicked(MouseEvent event) {
+        showDialogInformation("This Functionality Is Still Under Maintainance");
+    }
+
+        
         private void showDialogInformation(String information)
         {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -209,19 +273,16 @@ public class BookListViewController implements Initializable {
         private void showEditDeleteOption(String bookName)
         {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Edit And Delete Option");
+            alert.setTitle("Delete Option");
             alert.setHeaderText("Think Before You Click");
-            alert.setContentText("Do you want to edit or delete the book: " + bookName);
+            alert.setContentText("Make sure if you really want to delete the book: " + bookName);
             
-            ButtonType buttonTypeEdit = new ButtonType("EDIT");
             ButtonType buttonTypeDelete = new ButtonType("DELETE");
             ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
-            alert.getButtonTypes().setAll(buttonTypeEdit, buttonTypeDelete, buttonTypeCancel);
+            alert.getButtonTypes().setAll( buttonTypeDelete, buttonTypeCancel);
+            
             Optional<ButtonType> result =alert.showAndWait();
-            if (result.get() == buttonTypeEdit){
-                // ... user chose "Edit"
-                System.out.println("Edit");
-            } else if (result.get() == buttonTypeDelete) {
+            if(result.get() == buttonTypeDelete) {
                 // ... user chose "Delete"
                 deleteBookFromDB();
                 System.out.println("Delete");
@@ -231,16 +292,17 @@ public class BookListViewController implements Initializable {
         }
         
     @FXML
-    void mousePressedOnBook(MouseEvent event) {
+    void mousePressedOnBook(MouseEvent event)
+    {
         if(book_table.getSelectionModel().getSelectedItem()==null)
         {
             showDialogInformation("No Items To Select");
         }
         else
         {
-            showEditDeleteOption(book_table.getSelectionModel().getSelectedItem().getBook_title());
+            //showEditDeleteOption(book_table.getSelectionModel().getSelectedItem().getBook_title());
             
-            System.out.println(book_table.getSelectionModel().getSelectedItem().getBook_title());
+            //System.out.println(book_table.getSelectionModel().getSelectedItem().getBook_title());
         }   
     }
     

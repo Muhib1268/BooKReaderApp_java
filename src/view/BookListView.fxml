@@ -18,9 +18,9 @@
             <Button fx:id="buttonReadBooks" layoutX="302.0" layoutY="12.0" mnemonicParsing="false" onAction="#readBookMenuButtonAction" prefHeight="39.0" prefWidth="69.0" style="-fx-background-color: #66CDAA;" text="Read" textAlignment="CENTER" />
             <Circle fx:id="buttonHome" accessibleRole="BUTTON" fill="#4c6c83" layoutX="140.0" layoutY="31.0" onMouseClicked="#onButtonHomeClicked" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
          </children></AnchorPane>
-      <AnchorPane fx:id="bookPane" layoutX="-2.0" layoutY="70.0" prefHeight="554.0" prefWidth="506.0" style="-fx-background-color: #008B8B;">
+      <AnchorPane fx:id="bookPane" layoutY="70.0" prefHeight="556.0" prefWidth="506.0" style="-fx-background-color: #008B8B;">
          <children>
-            <TableView fx:id="book_table" layoutX="11.0" layoutY="27.0" onMousePressed="#mousePressedOnBook" prefHeight="518.0" prefWidth="487.0">
+            <TableView fx:id="book_table" layoutX="11.0" layoutY="27.0" onMousePressed="#mousePressedOnBook" prefHeight="477.0" prefWidth="487.0">
                <columns>
                   <TableColumn fx:id="book_name_function" prefWidth="181.0" style="-fx-text-alignment: right; -fx-background-color: #B0E0E6;" text=" Book" />
                   <TableColumn fx:id="book_author_function" prefWidth="166.0" style="-fx-background-color: #C0C0C0;" text="    Author" />
@@ -33,6 +33,9 @@
                   <Font name="Verdana Bold" size="19.0" />
                </font>
             </Label>
+            <Button fx:id="buttonOpenBook" layoutX="70.0" layoutY="515.0" mnemonicParsing="false" onMouseClicked="#onOpenButtonClicked" prefHeight="25.0" prefWidth="57.0" text="Open" />
+            <Button fx:id="buttonEditFromDB" layoutX="227.0" layoutY="515.0" mnemonicParsing="false" onMouseClicked="#onEditButtonClicked" prefHeight="25.0" prefWidth="57.0" text="Edit" />
+            <Button fx:id="buttonDeleteFromDB" layoutX="384.0" layoutY="515.0" mnemonicParsing="false" onMouseClicked="#onDeleteButtonClicked" prefHeight="25.0" prefWidth="57.0" text="Delete" />
          </children>
       </AnchorPane>
    </children>
